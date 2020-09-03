@@ -43,6 +43,10 @@ public class MidiWorldMain extends PApplet {
 	//doing all the setup stuff
 	public void setup() {
 		fill(120, 50, 240);
+		
+		//create my generators for pitch and rhythm
+		ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
+		ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
 
 		// returns a url
 		String filePath = getPath("mid/gardel_por.mid");
@@ -54,12 +58,14 @@ public class MidiWorldMain extends PApplet {
 
 //		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 		midiNotes.setWhichLine(0);
+		
+		pitchGenerator.train(midiNotes.getPitchArray());
+		rhythmGenerator.train(midiNotes.getRhythmArray());
 
 		player = new MelodyPlayer(this, 100.0f);
-
 		player.setup();
-		player.setMelody(midiNotes.getPitchArray());
-		player.setRhythm(midiNotes.getRhythmArray());
+		player.setMelody(pitchGenerator.generate(20));
+		player.setRhythm(rhythmGenerator.generate(20));
 	}
 
 	public void draw() {
@@ -92,9 +98,25 @@ public class MidiWorldMain extends PApplet {
 
 	//this starts & restarts the melody.
 	public void keyPressed() {
+		MidiFileToNotes midiNotes1; //read a midi file
+		// returns a url
+		String filePath = getPath("mid/gardel_por.mid");
+
+		midiNotes1 = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
+													//be created with "new". Note how every object is a pointer or reference. Every. single. one.
+
+
+//		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
+		midiNotes.setWhichLine(0);
+		
+		
 		if (key == ' ') {
 			player.reset();
 			println("Melody started!");
+		}
+		
+		else if (key =='1') {
+			//run your unit 1 test
 		}
 	}
 }
