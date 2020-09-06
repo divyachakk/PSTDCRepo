@@ -1,6 +1,4 @@
 
-
-
 import java.util.ArrayList;
 
 //comment everything that you can
@@ -20,8 +18,33 @@ public class ProbabilityGenerator <T> {
 	}
 	
 	//it is training probability generator with new data
-	void train(ArrayList<T> newTokens)
+	void train(ArrayList<T> newTokens) 
 	{
+		for (int i = 0; i < newTokens.indexOf(i) - 1; i++  ) { //trying to go through a for loops through the array
+			//list of alphabet to find newTokens in the alphabet
+			 
+			//int index = newTokens.indexOf(i);
+			
+			
+		}
+	
+//	 for i = 0 to size of newtokens - 1
+//     {
+//
+//             index = find index of newtokens[i] in alphabet
+//
+//             if (index is NOT found)
+//             {
+//                     add newtokens[i] to alphabet container/array
+//
+//                     add a 0 to your alphabet counts array                                
+//
+//             }      
+//
+//              alphabet_counts[index]++ //note – syntax will look different – eg. if using ArrayList
+//     }
+	
+//{
 		//code the training function, populate alphabet each time with newTokens	
 	}
 	

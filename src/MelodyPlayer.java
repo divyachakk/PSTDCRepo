@@ -1,11 +1,6 @@
-/*
- * c2017 Courtney Brown 
- * 
- * Class: MelodyPlayer
- * Description: Sends a melody of midi notes to an external player/midi channel
- * 
- */
- 
+//Programmer: Divya Chakkaram
+//Date:
+//Description:
 
 import themidibus.*;
 import processing.core.*;
