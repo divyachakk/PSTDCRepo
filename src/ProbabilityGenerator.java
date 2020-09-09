@@ -23,24 +23,24 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 			//list of alphabet to find newTokens in the alphabet
 				int index = alphabet.indexOf(newTokens.get(i)); //setting index equal to the index of newTokens.get(i) in the alphabet ArrayList
 				if (index == -1) { //if index doesn't exist in alphabet
-					alphabet.add(newTokens.get(i));//add newTokens.get(i) to 
-					alphabet_counts.add(0);	
-					index = alphabet.size()-1;
+					alphabet.add(newTokens.get(i));//add newTokens.get(i) to alphabet array
+					alphabet_counts.add(0);//add zero to the alphabet counts array if particular newTokens(i) doesn's exist	
+					index = alphabet.size()-1;//put index value at the end of alphabet array
 				} 
 				
-				alphabet_counts.set(index, alphabet_counts.get(index)+1);									
+				alphabet_counts.set(index, alphabet_counts.get(index)+1);//move along alphabet_counts array while adding index value								
 		}
 		
-		sum += newTokens.size();
+		sum += newTokens.size(); //every time new value is added to the ArrayList, add it to the sum variable
 		
-		System.out.println(alphabet_counts);
-		System.out.println(alphabet);
+		System.out.println(alphabet_counts);//print out what is happening in alphabet_counts
+		System.out.println(alphabet);//print out what is happening in alphabet
 			
 	}
 	
-	void printProbability(){
-		
-	}
+//	void printProbability(){
+//		
+//	}
 	
 	T generate()
 	{
