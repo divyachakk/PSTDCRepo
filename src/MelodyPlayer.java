@@ -1,10 +1,10 @@
 //Programmer: Divya Chakkaram
-//Date:
+//Date: Sep 9, 2020
 //Description:
 
-import themidibus.*;
-import processing.core.*;
-import java.util.*;
+import themidibus.*; //importing midibus library
+import processing.core.*; //importing processing libraries
+import java.util.*; //importing java tools
 
 // send the MIDI elsewhere to play the notes
 public class MelodyPlayer {
@@ -100,7 +100,6 @@ public class MelodyPlayer {
 
 			note_index++;
 		}
-
 	}
 
 	//reset note to 0
