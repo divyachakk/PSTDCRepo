@@ -32,20 +32,24 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 		}
 		
 		sum += newTokens.size(); //every time new value is added to the ArrayList, add it to the sum variable
-		
-		System.out.println(alphabet_counts);//print out what is happening in alphabet_counts
-		System.out.println(alphabet);//print out what is happening in alphabet
+
 			
 	}
 	
-//	void printProbability(){
-//		
-//	}
+	void printProbability(){
+		for (int i = 0; i < alphabet.size(); i++) {
+			System.out.println("Token: "+ alphabet.get(i)); //this prints out the token number
+		}
+		
+		for (int i = 0; i < alphabet_counts.size(); i++) {
+			System.out.println("Probability: "+ alphabet_counts.get(i)/sum); //this normalizes and prints out the prob distr values of the unique tokens
+		}
+	}
 	
 	T generate()
 	{
 		T newToken = null;
-		//do something here - generate one token
+		//do something here - generate one token from the probability distribution that we stored in train
 		return newToken;
 	}
 	

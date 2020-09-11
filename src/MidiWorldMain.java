@@ -44,6 +44,7 @@ public class MidiWorldMain extends PApplet {
 		ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
 		ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
 
+
 		// returns a url
 		String filePath = getPath("mid/gardel_por.mid");
 		// playMidiFile(filePath);
@@ -140,6 +141,9 @@ public class MidiWorldMain extends PApplet {
 			player.setup();
 			player.setMelody(pitchGenerator.generate(20));
 			player.setRhythm(rhythmGenerator.generate(20));
+			
+			pitchGenerator.printProbability(); //prints the probability distribution values and tokens for the pitches
+			rhythmGenerator.printProbability();//prints the probability distribution values and tokens for the rhythms
 
 		}
 	}
