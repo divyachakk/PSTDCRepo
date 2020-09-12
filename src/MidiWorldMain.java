@@ -38,7 +38,7 @@ public class MidiWorldMain extends PApplet {
 	//doing all the setup stuff
 	public void setup() {
 		fill(120, 50, 240);
-		background(223,93,195); //changing the background color to pink
+		background(105,207,190); //changing the background color to pink
 		
 		//create my generators for pitch and rhythm
 		ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
@@ -58,6 +58,7 @@ public class MidiWorldMain extends PApplet {
 		
 		pitchGenerator.train(midiNotes.getPitchArray());
 		rhythmGenerator.train(midiNotes.getRhythmArray());
+		
 
 		player = new MelodyPlayer(this, 100.0f);
 		player.setup();
@@ -66,11 +67,12 @@ public class MidiWorldMain extends PApplet {
 	}
 
 	public void draw() {
+//		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		fill(13,19,41); //changing color of text
 		textSize(20); //setting the size of the text
 		text("Press any key to start the melody!",130,100); //instructions for how Unit 1 test will run
 		text("Press '1' to run the Unit 1 test.", 145, 200);//instructions for how Unit 1 test will run
-		//player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+
 
 	}
 
