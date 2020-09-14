@@ -68,6 +68,17 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 			sumProbs.add((float) filler);	
 		}
 		
+		float randIndex = (float)Math.random(); 
+		int index1 = sumProbs.indexOf(randIndex);
+		newToken = alphabet.get(index1);
+		
+		//probably go through the while loop right here to generate the note
+		boolean found = false;
+//		found = randIndex <= sumProbs[index];
+		while(!found) {
+			
+		}
+			
 		return newToken;
 	}
 	
