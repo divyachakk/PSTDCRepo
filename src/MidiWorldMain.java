@@ -183,6 +183,14 @@ public class MidiWorldMain extends PApplet {
 			
 		}
 		else if (key == '3') {
+//            melodyGen.train(midiNotes.getPitchArray());
+//            for (int i = 1; i <= 10000; i++) {
+//            	newSong = melodyGen.generate(20);
+//            	probDistGen.train(newSong);
+//            	
+//            }         
+//            probDistGen.printProbability();
+//            
 			System.out.println("sorry i didn't get time to figure out unit test 3, i was struggling through the whole project :(");
 		}
 	}
