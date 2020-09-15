@@ -165,6 +165,10 @@ public class MidiWorldMain extends PApplet {
 			// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 			midiNotes.setWhichLine(0);
 			
+			pitchGenerator.train(midiNotes.getPitchArray());
+			rhythmGenerator.train(midiNotes.getRhythmArray());
+			
+		
 			pitchGenerator.generate(20); //generating a melody with 20 pitches keys
 			rhythmGenerator.generate(20); //generating a melody with 20 rhythm keys
 
