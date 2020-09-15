@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Sep 9, 2020
+//Date: Sep 14, 2020
 //Description
 
 import processing.core.*; //importing processing libraries
@@ -38,7 +38,7 @@ public class MidiWorldMain extends PApplet {
 	//doing all the setup stuff
 	public void setup() {
 		fill(120, 50, 240);
-		background(105,207,190); //changing the background color to pink
+		background(105,207,190); //changing the background color to teal
 		
 		//create my generators for pitch and rhythm
 		ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
@@ -67,12 +67,13 @@ public class MidiWorldMain extends PApplet {
 	}
 
 	public void draw() {
-//		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		fill(13,19,41); //changing color of text
 		textSize(20); //setting the size of the text
-		text("Press any key to start the melody!",130,100); //instructions for how Unit 1 test will run
-		text("Press '1' to run the Unit 1 test.", 145, 200);//instructions for how Unit 1 test will run
-
+		text("Press any key to start the melody!",130,100);
+		text("Press '1' to run the Unit 1 test.", 145, 150);//instructions for how Unit 1 test will run
+		text("Press '2' to run the Unit 2 test.", 145, 200);//instructions for how Unit 2 test will run
+		text("Press '3' to run the Unit 2 test.", 145, 250);//instructions for how Unit 3 test will run
 
 	}
 
@@ -118,7 +119,7 @@ public class MidiWorldMain extends PApplet {
 			println("Melody started!"); //if any key is pressed, it will print to console that Melody has started
 		}
 		
-		else if (key =='1') { //pressing the key "1"
+		else if (key =='1') { //pressing the key "1" for Unit test 1
 
 			//run your unit 1 test
 			//create my generators for pitch and rhythm
@@ -147,6 +148,38 @@ public class MidiWorldMain extends PApplet {
 			pitchGenerator.printProbability(); //prints the probability distribution values and tokens for the pitches
 			rhythmGenerator.printProbability();//prints the probability distribution values and tokens for the rhythms
 
+		} 
+		else if (key == '2') { //pressing the key "2" for Unit test 2
+			//create my generators for pitch and rhythm
+			ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
+			ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
+
+			// returns a url
+			String filePath1 = getPath("mid/MaryHadALittleLamb.mid"); //playing Mary Had A Little Lamb midi file
+			// playMidiFile(filePath);
+
+			midiNotes = new MidiFileToNotes(filePath1); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
+			//be created with "new". Note how every object is a pointer or reference. Every. single. one.
+
+
+			// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
+			midiNotes.setWhichLine(0);
+			
+			pitchGenerator.generate(20); //generating a melody with 20 pitches keys
+			rhythmGenerator.generate(20); //generating a melody with 20 rhythm keys
+
+			player = new MelodyPlayer(this, 100.0f);
+			player.setup();
+			player.setMelody(pitchGenerator.generate(20));
+			player.setRhythm(rhythmGenerator.generate(20));
+			
+			pitchGenerator.printProbability(); //prints the probability distribution values and tokens for the pitches
+			rhythmGenerator.printProbability();//prints the probability distribution values and tokens for the rhythms
+			
+			
+		}
+		else if (key == '3') {
+			System.out.println("sorry i didn't get time to figure out unit test 3, i was struggling through the whole project :(");
 		}
 	}
 }

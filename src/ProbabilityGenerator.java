@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Sep 9, 2020
+//Date: Sep 14, 2020
 //Description
 
 //this website helped me understand how to cleanly sum previous values in an arraylist
@@ -18,7 +18,7 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 	float sum;//variable used to find the total number of newTokens in the projects
 	ArrayList<Float> probs;
 	ArrayList<Float> sumProbs;
-	int filler = 0;
+	float filler;
 	
 	ProbabilityGenerator()
 	{
@@ -26,6 +26,7 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 		alphabet_counts = new ArrayList<Integer>(); //initializing alphabet_counts ArrayList
 		probs = new ArrayList<Float>();
 		sumProbs = new ArrayList<Float>();
+		float filler = 0;
 	}
 	
 	//it is training probability generator with new data
@@ -58,27 +59,30 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 	}
 	
 	T generate() {
-		for (float ac: alphabet_counts) {
-			probs.add(ac/sum);		
+		for (float ac: alphabet_counts) { //this adds the values of normalized probability distribution to an ArrayList - probs
+			probs.add(ac/sum);
 		}
-		T newToken = null;
-//		do something here - generate one token from the probability distribution that we stored in train
-		for(int i = 0; i < probs.size(); i++) {
+		
+		for(int i = 0; i < probs.size()-1; i++) { //this adds the values of probs, with current and previous value summed together, to the ArrayList sumProbs
 			filler += probs.get(i);
-			sumProbs.add((float) filler);	
+			sumProbs.add(filler);	
 		}
 		
-		float randIndex = (float)Math.random(); 
-		int index1 = sumProbs.indexOf(randIndex);
-		newToken = alphabet.get(index1);
 		
-		//probably go through the while loop right here to generate the note
-		boolean found = false;
-//		found = randIndex <= sumProbs[index];
-		while(!found) {
-			
+		T newToken = null;
+		float randIndex = (float)Math.random(); //this randomly picks a number between 0.0 and 1.0, excluding 1.0
+	
+		boolean found = false; //sets found to false
+		int i = 0; //initializes index i to 0
+		
+		while(!found) { //found doesn't equal true
+			found = randIndex <= sumProbs.get(i);
+			//System.out.println(found);
+			i++; //adds one to the index i everytime you go through the loop
 		}
-			
+		
+		newToken = alphabet.get(i-1); //newToken, after going through the while loop, then returns a value from the alphabet ArrayList
+		
 		return newToken;
 	}
 	
