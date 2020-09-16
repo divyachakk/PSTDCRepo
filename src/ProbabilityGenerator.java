@@ -24,9 +24,6 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 	{
 		alphabet = new ArrayList<T>(); //initializing alphabet ArrayList
 		alphabet_counts = new ArrayList<Integer>(); //initializing alphabet_counts ArrayList
-		probs = new ArrayList<Float>();
-		sumProbs = new ArrayList<Float>();
-		float filler = 0;
 	}
 	
 	//it is training probability generator with new data
@@ -50,40 +47,38 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 	
 	void printProbability(){
 		for (int i = 0; i < alphabet.size(); i++) {
-			System.out.println("Token: "+ alphabet.get(i)); //this prints out the token number
-		}
-		
-		for (int i = 0; i < alphabet_counts.size(); i++) {
-			System.out.println("Probability: "+ alphabet_counts.get(i)/sum); //this normalizes and prints out the prob distr values of the unique tokens
+			System.out.println("Token: "+ alphabet.get(i) + " | Probability: "+ alphabet_counts.get(i)/sum); //this prints out the token number
 		}
 	}
 	
 	T generate() {
+		probs = new ArrayList<Float>(); //declaring float ArrayList for probs 
+		sumProbs = new ArrayList<Float>(); //declaring float ArrayList for sumProbs
+		float filler = 0; //declaring and initializing float filler
+		
 		for (float ac: alphabet_counts) { //this adds the values of normalized probability distribution to an ArrayList - probs
 			probs.add(ac/sum);
 		}
 		
 		for(int i = 0; i < probs.size()-1; i++) { //this adds the values of probs, with current and previous value summed together, to the ArrayList sumProbs
 			filler += probs.get(i);
-			sumProbs.add(filler);	
+			sumProbs.add(filler);
 		}
-		
-		
+		sumProbs.add((float)1); //since we're starting behind from 0, have to add one after the loop has been executed
+
 		T newToken = null;
 		float randIndex = (float)Math.random(); //this randomly picks a number between 0.0 and 1.0, excluding 1.0
 	
 		boolean found = false; //sets found to false
 		int i = 0; //initializes index i to 0
 		
-		while(!found) { //found doesn't equal true
+		while(!found && i < sumProbs.size()) { //found doesn't equal true
 			found = randIndex <= sumProbs.get(i);
-			//System.out.println(found);
-			i++; //adds one to the index i everytime you go through the loop
+			i++; //adds one to the index i every time you go through the loop
 		}
 		
 		newToken = alphabet.get(i-1); //newToken, after going through the while loop, then returns a value from the alphabet ArrayList
-		
-		return newToken;
+		return newToken; //return the newToken value afterwards
 	}
 	
 	ArrayList<T> generate(int length) {

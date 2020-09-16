@@ -73,7 +73,7 @@ public class MidiWorldMain extends PApplet {
 		text("Press any key to start the melody!",130,100);
 		text("Press '1' to run the Unit 1 test.", 145, 150);//instructions for how Unit 1 test will run
 		text("Press '2' to run the Unit 2 test.", 145, 200);//instructions for how Unit 2 test will run
-		text("Press '3' to run the Unit 2 test.", 145, 250);//instructions for how Unit 3 test will run
+		text("Press '3' to run the Unit 3 test.", 145, 250);//instructions for how Unit 3 test will run
 
 	}
 
@@ -121,7 +121,6 @@ public class MidiWorldMain extends PApplet {
 		
 		else if (key =='1') { //pressing the key "1" for Unit test 1
 
-			//run your unit 1 test
 			//create my generators for pitch and rhythm
 			ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
 			ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
@@ -132,7 +131,6 @@ public class MidiWorldMain extends PApplet {
 
 			midiNotes = new MidiFileToNotes(filePath1); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
 			//be created with "new". Note how every object is a pointer or reference. Every. single. one.
-
 
 			// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 			midiNotes.setWhichLine(0);
@@ -153,45 +151,35 @@ public class MidiWorldMain extends PApplet {
 			//create my generators for pitch and rhythm
 			ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
 			ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
-
-			// returns a url
-			String filePath1 = getPath("mid/MaryHadALittleLamb.mid"); //playing Mary Had A Little Lamb midi file
-			// playMidiFile(filePath);
-
-			midiNotes = new MidiFileToNotes(filePath1); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
-			//be created with "new". Note how every object is a pointer or reference. Every. single. one.
-
-
-			// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
-			midiNotes.setWhichLine(0);
+			
+			pitchGenerator.train(midiNotes.getPitchArray()); //trains the pitchGenerator
+			rhythmGenerator.train(midiNotes.getRhythmArray()); //trains the rhythmGenerator
+		
+			System.out.println(pitchGenerator.generate(20)); //prints out the notes for the pitches from the generated melody
+			System.out.println(rhythmGenerator.generate(20)); //prints out the rhythms from the generated melody
+			
+		}
+		else if (key == '3') { //press the key '3' for the Unit Test 3
+			ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
+			ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
 			
 			pitchGenerator.train(midiNotes.getPitchArray());
 			rhythmGenerator.train(midiNotes.getRhythmArray());
 			
-		
-			pitchGenerator.generate(20); //generating a melody with 20 pitches keys
-			rhythmGenerator.generate(20); //generating a melody with 20 rhythm keys
-
-			player = new MelodyPlayer(this, 100.0f);
-			player.setup();
-			player.setMelody(pitchGenerator.generate(20));
-			player.setRhythm(rhythmGenerator.generate(20));
-			
-			pitchGenerator.printProbability(); //prints the probability distribution values and tokens for the pitches
-			rhythmGenerator.printProbability();//prints the probability distribution values and tokens for the rhythms
+			ProbabilityGenerator<Integer> probDistGenPitch = new ProbabilityGenerator<Integer>(); //declares and initializes another probability Generator for the new pitch value probabilities
+			ProbabilityGenerator<Double> probDistGenRhythm = new ProbabilityGenerator<Double>(); //declares and initializes another probability Generator for the new rhythm value probabilities
 			
 			
-		}
-		else if (key == '3') {
-//            melodyGen.train(midiNotes.getPitchArray());
-//            for (int i = 1; i <= 10000; i++) {
-//            	newSong = melodyGen.generate(20);
-//            	probDistGen.train(newSong);
-//            	
-//            }         
-//            probDistGen.printProbability();
-//            
-			System.out.println("sorry i didn't get time to figure out unit test 3, i was struggling through the whole project :(");
+            for (int i = 1; i <= 10000; i++) { //for loop going through the 10000 melodies
+            	ArrayList <Integer> newSongPitch = pitchGenerator.generate(20); //declaring and initializing an ArrayList of Integers, newSongPitch, for the generated notes' pitch probability Generator
+            	ArrayList<Double> newSongRhythm = rhythmGenerator.generate(20); //declaring and initializing an ArrayList of Doubles, newSongRhyth, for the generated notes' rhythm probability Generator
+            	probDistGenPitch.train(newSongPitch);	//training the pitch probability generator with the ArrayList of generated pitches
+            	probDistGenRhythm.train(newSongRhythm); //training the rhythm probability generator with the ArrayList of generated rhythms
+            }    
+            
+            probDistGenPitch.printProbability(); //printing out the pitch probability distribution of the 10,000 melodies 
+            probDistGenRhythm.printProbability(); //printing out the rhythm probability distribution of 10,000 melodies
+            
 		}
 	}
 }
