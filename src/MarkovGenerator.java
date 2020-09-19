@@ -45,6 +45,9 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 				
 				}
 			
+//			alphabet.add(i); 
+//			why can't I add the value of the current token to the alphabet array?
+			
 			}
 			
 
