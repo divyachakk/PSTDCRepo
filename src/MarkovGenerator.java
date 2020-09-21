@@ -13,7 +13,6 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 		alphabet = new ArrayList<T>();
 
 	}
-	
 	//use a for loop to interate through the input string with i
 	//have to expand transition table to expand the alphabet
 	//transitionTable.get(lastIndex) <- this will give you your row array to update the counts
@@ -42,20 +41,31 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 					transitionTable.add(myRow); //adding the new row to the transitionTable
 					
 					}
-				
-				}
-			
+				}			
 //			alphabet.add(i); 
 //			why can't I add the value of the current token to the alphabet array?
-			
+			}
+			//adding the counts now to the transition table
+			if (lastIndex > -1) { //this indicates that it isn't the first time through because there is a previous token
+				ArrayList<Integer> rowCount = transitionTable.get(lastIndex); //getting the correct row from transitionTable with lastIndex
+				Integer myElement = rowCount.get(tokenIndex); //getting the correct value in the column from the tokenIndex
+				myElement++; //adding one to the cross referenced value
+							
+//				for (int j = 0; j < transitionTable.size(); j++) {
+//					transitionTable.get(tokenIndex);
+//					
+//
+//					ArrayList row = transitionTable.get(j);
+//					for (int k = 0; k < row.size(); k++) {
+//						transitionTable.get(lastIndex); 
+//						}
+//					
+//					}		
 			}
 			
-
-			
-			
+			lastIndex = tokenIndex; //setting the current to the previous value for the next time through
 		}
-			
-			
+					
 	}
 		
 }
