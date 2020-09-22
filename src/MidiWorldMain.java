@@ -67,13 +67,17 @@ public class MidiWorldMain extends PApplet {
 	}
 
 	public void draw() {
-		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		//boolean for playing 'is playing'
+//		boolean isPlaying = false;
+//		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		fill(13,19,41); //changing color of text
 		textSize(20); //setting the size of the text
 		text("Press any key to start the melody!",130,100);
-		text("Press '1' to run the Unit 1 test.", 145, 150);//instructions for how Unit 1 test will run
-		text("Press '2' to run the Unit 2 test.", 145, 200);//instructions for how Unit 2 test will run
-		text("Press '3' to run the Unit 3 test.", 145, 250);//instructions for how Unit 3 test will run
+//		text("Press '1' to run the Unit 1 test.", 145, 150);//instructions for how Unit 1 test will run
+//		text("Press '2' to run the Unit 2 test.", 145, 200);//instructions for how Unit 2 test will run
+//		text("Press '3' to run the Unit 3 test.", 145, 250);//instructions for how Unit 3 test will run
+		text("Press '4' to run the Unit 1 test.", 145, 150);//instructions for how Unit 1 test will run
+
 
 	}
 
@@ -115,6 +119,7 @@ public class MidiWorldMain extends PApplet {
 		
 		
 		if (key == ' ') {
+//			player.play();
 			player.reset(); //resetting the playing sequence
 			println("Melody started!"); //if any key is pressed, it will print to console that Melody has started
 		}
@@ -198,15 +203,13 @@ public class MidiWorldMain extends PApplet {
 			mpitchGenerator.train(midiNotes.getPitchArray());
 			mrhythmGenerator.train(midiNotes.getRhythmArray());
 
-			player = new MelodyPlayer(this, 100.0f);
-			player.setup();
-			player.setMelody(mpitchGenerator.generate(20));
-			player.setRhythm(mrhythmGenerator.generate(20));
+//			player = new MelodyPlayer(this, 100.0f);
+//			player.setup();
+//			player.setMelody(mpitchGenerator.generate(20));
+//			player.setRhythm(mrhythmGenerator.generate(20));
 			
-//			mpitchGenerator.printProbability(); //prints the probability distribution values and tokens for the pitches
-//			mrhythmGenerator.printProbability();//prints the probability distribution values and tokens for the rhythms
-			
-			
+			mpitchGenerator.printTransitionTable(); //prints the transitionTable for pitches
+			mrhythmGenerator.printTransitionTable();//prints the transitionTable for rhythm		
 			
 			}
 		
