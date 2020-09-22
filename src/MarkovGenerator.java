@@ -25,48 +25,37 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 		int lastIndex = -1;
 
 		for (int i = 0; i < input.size(); i++) { //for loop going one by one through the input ArrayList
-			int tokenIndex = 0; // setting tokenIndex to 0 before changing values
+			int tokenIndex = alphabet.indexOf(input.get(i)); // setting tokenIndex before changing values
 			
 			if (!alphabet.contains(i)) { //if alphabet doesn't contain i in the for loop
 				
-			tokenIndex = alphabet.size(); //set tokenIndex to the size of alphabet if i is not found in alphabet
-			
-			for (int j = 0; j < transitionTable.size(); j++) {
-//				transitionTable= add_element(0);
-//				transitionTable.add(0);
-				
-				ArrayList row = transitionTable.get(j);
-				for (int k = 0; k < row.size(); k++) {
-					ArrayList<Integer> myRow = new ArrayList(); //to add a row if i is not found in alphabet
-					transitionTable.add(myRow); //adding the new row to the transitionTable
-					
+				tokenIndex = alphabet.size(); //set tokenIndex to the size of alphabet if i is not found in alphabet
+
+				ArrayList<Integer> myRow = new ArrayList(); //creating a new arrayList for a new row in the transition table
+				for (int j = 0; j < alphabet.size(); j++) { //iterating through the new row that's the size of alphabet
+					myRow.add(0); //add a zero to the end of the row, aka add it to the column			
 					}
-				}			
-//			alphabet.add(i); 
-//			why can't I add the value of the current token to the alphabet array?
+			
+			alphabet.add(input.get(i)); //adding the current token to alphabet 
+
 			}
+			
 			//adding the counts now to the transition table
 			if (lastIndex > -1) { //this indicates that it isn't the first time through because there is a previous token
 				ArrayList<Integer> rowCount = transitionTable.get(lastIndex); //getting the correct row from transitionTable with lastIndex
 				Integer myElement = rowCount.get(tokenIndex); //getting the correct value in the column from the tokenIndex
-				myElement++; //adding one to the cross referenced value
-							
-//				for (int j = 0; j < transitionTable.size(); j++) {
-//					transitionTable.get(tokenIndex);
-//					
-//
-//					ArrayList row = transitionTable.get(j);
-//					for (int k = 0; k < row.size(); k++) {
-//						transitionTable.get(lastIndex); 
-//						}
-//					
-//					}		
+				myElement++; //adding one to the cross referenced value									
 			}
 			
 			lastIndex = tokenIndex; //setting the current to the previous value for the next time through
 		}
 					
 	}
-		
+	
+//	void printProbability(){
+//		for (int i = 0; i < alphabet.size(); i++) {
+//			System.out.println("Token: "+ alphabet.get(i) + " | Probability: "+ alphabet_counts.get(i)/sum); //this prints out the token number
+//		}
+//	}
 }
 

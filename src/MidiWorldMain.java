@@ -181,5 +181,34 @@ public class MidiWorldMain extends PApplet {
             probDistGenRhythm.printProbability(); //printing out the rhythm probability distribution of 10,000 melodies
             
 		}
+		else if (key == '4') {
+			MarkovGenerator<Integer> mpitchGenerator = new MarkovGenerator<Integer>();
+			MarkovGenerator<Double> mrhythmGenerator = new MarkovGenerator<Double>();
+			
+			// returns a url
+			String filePath1 = getPath("mid/MaryHadALittleLamb.mid"); //playing Mary Had A Little Lamb midi file
+			// playMidiFile(filePath);
+
+			midiNotes = new MidiFileToNotes(filePath1); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
+			//be created with "new". Note how every object is a pointer or reference. Every. single. one.
+
+			// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
+			midiNotes.setWhichLine(0);
+			
+			mpitchGenerator.train(midiNotes.getPitchArray());
+			mrhythmGenerator.train(midiNotes.getRhythmArray());
+
+			player = new MelodyPlayer(this, 100.0f);
+			player.setup();
+			player.setMelody(mpitchGenerator.generate(20));
+			player.setRhythm(mrhythmGenerator.generate(20));
+			
+//			mpitchGenerator.printProbability(); //prints the probability distribution values and tokens for the pitches
+//			mrhythmGenerator.printProbability();//prints the probability distribution values and tokens for the rhythms
+			
+			
+			
+			}
+		
+		}
 	}
-}
