@@ -6,6 +6,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	
 	ArrayList<ArrayList<Integer>> transitionTable; 	//declaring an transitionTable ArrayList
 	ArrayList<T> alphabet; //declared an empty arraylist for alphabet
+	int sum;
 	
 	MarkovGenerator(){
 		//to create the ArrayList
@@ -49,18 +50,22 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			//adding the counts now to the transition table
 			if (lastIndex > - 1) { //this indicates that it isn't the first time through because there is a previous token
 				ArrayList<Integer> rowCount = transitionTable.get(lastIndex); //getting the correct row from transitionTable with lastIndex
-				Integer myElement = rowCount.get(tokenIndex); //getting the correct value in the column from the tokenIndex
-				myElement++; //adding one to the cross referenced value									
+				int myElement = rowCount.get(tokenIndex);
+				myElement++; //adding one to the cross referenced value	
+				rowCount.set(tokenIndex, myElement);  //getting and setting the correct value in the column from the tokenIndex
 			}
-			
+
 			lastIndex = tokenIndex; //setting the current to the previous value for the next time through
+
 		}
+//		sum += transitionTable.get(input.get(i));
+//		System.out.println(sum);
 					
 	}
 	
 	void printTransitionTable(){
 		for (int i = 0; i < transitionTable.size(); i++) {
-			System.out.println(transitionTable); //this prints out the transitionTable
+			System.out.println(alphabet.get(i) + " : " + transitionTable.get(i)); //this prints out the transitionTable
 		}
 	}
 }
