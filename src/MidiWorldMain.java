@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Sep 14, 2020
+//Date: Sep 21, 2020
 //Description
 
 import processing.core.*; //importing processing libraries
@@ -72,11 +72,11 @@ public class MidiWorldMain extends PApplet {
 //		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		fill(13,19,41); //changing color of text
 		textSize(20); //setting the size of the text
-		text("Press any key to start the melody!",130,100);
-//		text("Press '1' to run the Unit 1 test.", 145, 150);//instructions for how Unit 1 test will run
-//		text("Press '2' to run the Unit 2 test.", 145, 200);//instructions for how Unit 2 test will run
-//		text("Press '3' to run the Unit 3 test.", 145, 250);//instructions for how Unit 3 test will run
-		text("Press '4' to run the Unit 1 test.", 145, 150);//instructions for how Unit 1 test will run
+		text("Press any key to start the melody!",130,50);
+		text("Press '1' to run the Unit 1 test, project 1.", 105, 100);//instructions for how Unit 1 test will run
+		text("Press '2' to run the Unit 2 test, project 1.", 105, 150);//instructions for how Unit 2 test will run
+		text("Press '3' to run the Unit 3 test, project 1.", 105, 200);//instructions for how Unit 3 test will run
+		text("Press '4' to run the Unit 1 test, project 2.", 105, 250);//instructions for how Unit 1 test will run
 
 
 	}

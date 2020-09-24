@@ -1,3 +1,7 @@
+//Programmer: Divya Chakkaram
+//Date: Sep 21, 2020
+//Description:
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -6,7 +10,6 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	
 	ArrayList<ArrayList<Integer>> transitionTable; 	//declaring an transitionTable ArrayList
 	ArrayList<T> alphabet; //declared an empty arraylist for alphabet
-	int sum;
 	
 	MarkovGenerator(){
 		//to create the ArrayList
@@ -58,15 +61,33 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			lastIndex = tokenIndex; //setting the current to the previous value for the next time through
 
 		}
-//		sum += transitionTable.get(input.get(i));
-//		System.out.println(sum);
+
 					
 	}
 	
+
 	void printTransitionTable(){
-		for (int i = 0; i < transitionTable.size(); i++) {
-			System.out.println(alphabet.get(i) + " : " + transitionTable.get(i)); //this prints out the transitionTable
+		System.out.println(alphabet);//print out the alphabet arraylist before going through transition table/row arraylists
+
+		 for (int j = 0; j < transitionTable.size(); j++) { //iterating through the transition table
+			 ArrayList<Integer> sumrow = transitionTable.get(j); //initializing the arraylist sumrow to trnasitiontable.get(j)
+			 float sum = 0; //initializing sum to 0
+			  for (int k = 0; k < sumrow.size(); k++) { //iterating through sumrow arraylist values one by one
+				  sum += sumrow.get(k); //adding the values to the variable sum
+			  }
+			  System.out.print(alphabet.get(j)); //printing out alphabet from iterating through transition table values
+				  for (int o = 0; o <sumrow.size(); o++) { //iterating through sumrow values again
+					  if (sum == 0) { //if the value of sum = 0, print out "0.0" for the space
+						  System.out.print(" 0.0 ");
+					  }
+					  else { //if sum doesn't equal 0, print out the values in the sumrow one by one divided by the value of sum
+					  System.out.print(" " + sumrow.get(o)/sum + " ");
+					  }					  
+				  }
+				  
+				  System.out.println(); //println a space
+
+			  }
 		}
-	}
 }
 
