@@ -89,5 +89,30 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 
 			  }
 		}
-}
+	
+	T generate(T init token) {}
+                   
+        ArrayList<T> generate(T initToken, int numberOfTokensToGenerate){
+        //this calls the above.
+        }
+
+        ArrayList<T> generate(int numberOfTokensToGenerate){
+        }//this calls the above with a random initToken
+		//have to use an outside instance of probabilityGenerator in generate
+		//can also have user input for initToken in generate - have to account for any user errors tho
+		//first thing to do, find the index of the input token in alphabet
+		//after finding the index number, use that number to find which row in the transitiontable to generate - the row of counts
+		//after getting the row, you have to total the counts 
+		//divide each count by the total
+		//generate from the probabilities given above
+		//instead of recoding the above three steps, just inherit functionality from the probGenerator class
+		//so, after going through the transitiontable and arriving at the row that corresponds from the index of alphabet, use
+			//that data to go through the probabilitygenerator functionality (generate)
+			//that means maybe change your probability generator generatre function to take in the row from the transitiontable
+			//in as a parameter.
+//		int initToken = 0;
+//		return initToken;
+	
+		}
+
 
