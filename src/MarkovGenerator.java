@@ -90,14 +90,24 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			  }
 		}
 	
-	T generate(T init token) {}
-                   
-        ArrayList<T> generate(T initToken, int numberOfTokensToGenerate){
-        //this calls the above.
-        }
+	void generateMG(int initToken) {
+		for (int i = 0; i <alphabet.size(); i++) {
+			int index = alphabet.indexOf(initToken);
+			ArrayList<Integer> row = transitionTable.get(index);
+			
+			for (int k = 0; k < row.size(); k++) {
+				//resum the counts? or try to inherit functionality from probGen
+			}
 
-        ArrayList<T> generate(int numberOfTokensToGenerate){
-        }//this calls the above with a random initToken
+		}
+
+                   
+//        ArrayList<T> generate(T initToken, int numberOfTokensToGenerate){
+//        //this calls the above.
+//        }
+//
+//        ArrayList<T> generate(int numberOfTokensToGenerate){
+//        }//this calls the above with a random initToken
 		//have to use an outside instance of probabilityGenerator in generate
 		//can also have user input for initToken in generate - have to account for any user errors tho
 		//first thing to do, find the index of the input token in alphabet
@@ -114,5 +124,6 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 //		return initToken;
 	
 		}
+}
 
 
