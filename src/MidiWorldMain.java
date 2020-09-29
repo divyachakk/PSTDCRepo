@@ -211,7 +211,30 @@ public class MidiWorldMain extends PApplet {
 			mpitchGenerator.printTransitionTable(); //prints the transitionTable for pitches
 			mrhythmGenerator.printTransitionTable();//prints the transitionTable for rhythm		
 			
+			} else if (key == '5') {
+				MarkovGenerator<Integer> mpitchGenerator = new MarkovGenerator<Integer>();
+				MarkovGenerator<Double> mrhythmGenerator = new MarkovGenerator<Double>();
+				
+//				ProbabilityGenerator<Integer> initTokenGen = new ProbabilityGenerator<Integer>();				
+//				T initToken = initTokenGen.train(midiNotes.getPitchArray());
+				
+
+				
+//				T initToken = initTokenGen.train(midiNotes.getPitchArray());
+				
+//				mpitchGenerator.generate();
+			
 			}
 		
-		}
+		} 
+		
 	}
+
+
+
+
+
+
+
+
+

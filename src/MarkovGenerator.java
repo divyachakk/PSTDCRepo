@@ -10,6 +10,8 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	
 	ArrayList<ArrayList<Integer>> transitionTable; 	//declaring an transitionTable ArrayList
 	ArrayList<T> alphabet; //declared an empty arraylist for alphabet
+	ProbabilityGenerator<T> initTokenGen = new ProbabilityGenerator<T>();
+
 	
 	MarkovGenerator(){
 		//to create the ArrayList
@@ -24,7 +26,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	//tokenIndex is always the size of the alphabet everytime you parse through the input string
 	//when you update your counts, always look at what the lastIndex was
 	
-	void train(ArrayList<T> input) { 	//training is the process of filling the empty transition table
+	void train(ArrayList<T> input) { //training is the process of filling the empty transition table
 		
 		int lastIndex = -1;
 
@@ -60,8 +62,8 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 
 			lastIndex = tokenIndex; //setting the current to the previous value for the next time through
 
-		}
 
+		}
 					
 	}
 	
@@ -90,24 +92,34 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			  }
 		}
 	
-	void generateMG(int initToken) {
-		for (int i = 0; i <alphabet.size(); i++) {
-			int index = alphabet.indexOf(initToken);
-			ArrayList<Integer> row = transitionTable.get(index);
-			
-			for (int k = 0; k < row.size(); k++) {
-				//resum the counts? or try to inherit functionality from probGen
+
+	
+	   T generate(T initToken){
+// 		initToken = initTokenGen.train(alphabet_counts);
+		   //int initToken = initTokenGen.generate();	   
+		   for (int i = 0; i <alphabet.size(); i++) {
+				int index = alphabet.indexOf(initToken);
+				ArrayList<Integer> row = transitionTable.get(index);	   
+				   initTokenGen.generate(row);
+		   }
+
+		   
+		return initToken;
+		   
+		   
+	   }
+	   
+	   ArrayList<T> generate(T initToken, int numberOfTokensToGenerate){
+			ArrayList<T> newSequence = new ArrayList<T>();
+			for(int i = 0; i < numberOfTokensToGenerate; i++) {
+				newSequence.add(generate());
 			}
+			
+			return newSequence;
 
-		}
-
-                   
-//        ArrayList<T> generate(T initToken, int numberOfTokensToGenerate){
-//        //this calls the above.
-//        }
-//
-//        ArrayList<T> generate(int numberOfTokensToGenerate){
-//        }//this calls the above with a random initToken
+		   
+	   }
+	
 		//have to use an outside instance of probabilityGenerator in generate
 		//can also have user input for initToken in generate - have to account for any user errors tho
 		//first thing to do, find the index of the input token in alphabet
@@ -120,10 +132,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			//that data to go through the probabilitygenerator functionality (generate)
 			//that means maybe change your probability generator generatre function to take in the row from the transitiontable
 			//in as a parameter.
-//		int initToken = 0;
-//		return initToken;
 	
-		}
 }
 
 
