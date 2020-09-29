@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Sep 21, 2020
+//Date: Sep 28, 2020
 //Description:
 
 import java.util.ArrayList;
@@ -9,14 +9,14 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 
 	
 	ArrayList<ArrayList<Integer>> transitionTable; 	//declaring an transitionTable ArrayList
-	ArrayList<T> alphabet; //declared an empty arraylist for alphabet
+	//ArrayList<T> alphabet; //declared an empty arraylist for alphabet
 	ProbabilityGenerator<T> initTokenGen = new ProbabilityGenerator<T>();
 
 	
 	MarkovGenerator(){
 		//to create the ArrayList
 		transitionTable = new ArrayList();
-		alphabet = new ArrayList<T>();
+		//alphabet = new ArrayList<T>();
 
 	}
 	//use a for loop to interate through the input string with i
@@ -96,52 +96,39 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 
 	
 	   T generate(T initToken){
-				float index = alphabet.indexOf(initToken);
-				ArrayList<Integer> row = transitionTable.get((int) index);	
+				float index = alphabet.indexOf(initToken); //set index to index number of initToken in alphabet
+				ArrayList<Integer> row = transitionTable.get((int) index); //declaring a single arrayList, row, to the row with the index found with initToken
 				
 			 float total = 0; //initializing sum to 0
 			  for (int k = 0; k < row.size(); k++) { //iterating through row arraylist values one by one
-				  total += row.get(k); //adding the values to the variable sum
+				  total += row.get(k); //adding the values to the variable total
 			  }
-			  if (total == 0) {
-				  return initTokenGen.generate();
+			  if (total == 0) { //if the total counts = 0, return intTokenGen.generate()
+				  return initTokenGen.generate(); 
 			  }
 
-		sum = total;
-		alphabet_counts = row;
-		return generate();
+		sum = total; //set total in MarkovGenerator to the value of sum in ProbabilityGenerator
+		alphabet_counts = row; //set row in MarkovGenerator to the value of alphabet_counts in Probability Generator
+		return super.generate(); //return the generate method from probabilityGenerator, that is why super is used here
 		   	   
 	   }
 	   
-	   ArrayList<T> generate(T initToken, int numberOfTokensToGenerate){
+	   ArrayList<T> generate(T initToken, int numberOfTokensToGenerate){ //this calls the method above
 		   
-			ArrayList<T> newSequence = new ArrayList<T>();
-			T nextToken = initToken;
-			for(int i = 0; i < numberOfTokensToGenerate; i++) {
-				newSequence.add(nextToken);
-				nextToken = generate(nextToken);					
+			ArrayList<T> newSequence = new ArrayList<T>(); //newSequence is a new ArrayList 
+			T nextToken = initToken; //nextToken is set to initToken
+			for(int i = 0; i < numberOfTokensToGenerate; i++) { //iterating through whatever the length of the melody called is
+				newSequence.add(nextToken); //add the nextToken variable to newSequence ArrayList
+				nextToken = generate(nextToken); //nextToken is set to the value of generate(nextToken)				
 			}
 			
-			return newSequence;
+			return newSequence; //return the newSequence ArrayList
 		   
 	   }
 	   
-	   ArrayList<T> generate(int length){
+	   ArrayList<T> generate(int length){ //this calls the method above
 		   return generate(initTokenGen.generate(), length);
 	   }
-	
-		//have to use an outside instance of probabilityGenerator in generate
-		//can also have user input for initToken in generate - have to account for any user errors tho
-		//first thing to do, find the index of the input token in alphabet
-		//after finding the index number, use that number to find which row in the transitiontable to generate - the row of counts
-		//after getting the row, you have to total the counts 
-		//divide each count by the total
-		//generate from the probabilities given above
-		//instead of recoding the above three steps, just inherit functionality from the probGenerator class
-		//so, after going through the transitiontable and arriving at the row that corresponds from the index of alphabet, use
-			//that data to go through the probabilitygenerator functionality (generate)
-			//that means maybe change your probability generator generatre function to take in the row from the transitiontable
-			//in as a parameter.
 	
 }
 

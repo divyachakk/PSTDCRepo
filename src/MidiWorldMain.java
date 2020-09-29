@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Sep 21, 2020
+//Date: Sep 28, 2020
 //Description
 
 import processing.core.*; //importing processing libraries
@@ -73,10 +73,13 @@ public class MidiWorldMain extends PApplet {
 		fill(13,19,41); //changing color of text
 		textSize(20); //setting the size of the text
 		text("Press any key to start the melody!",130,50);
-		text("Press '1' to run the Unit 1 test, project 1.", 105, 100);//instructions for how Unit 1 test will run
-		text("Press '2' to run the Unit 2 test, project 1.", 105, 150);//instructions for how Unit 2 test will run
-		text("Press '3' to run the Unit 3 test, project 1.", 105, 200);//instructions for how Unit 3 test will run
-		text("Press '4' to run the Unit 1 test, project 2.", 105, 250);//instructions for how Unit 1 test will run
+		textSize(15);
+		text("Press '1' to run the Unit 1 test, project 1.", 145, 100);//instructions for how Unit 1 test will run
+		text("Press '2' to run the Unit 2 test, project 1.", 145, 135);//instructions for how Unit 2 test will run
+		text("Press '3' to run the Unit 3 test, project 1.", 145, 170);//instructions for how Unit 3 test will run
+		text("Press '4' to run the Unit 1 test, project 2.", 145, 205);//instructions for how Unit 1 test will run
+		text("Press '5' to run the Unit 2 test, project 2.", 145, 240);//instructions for how Unit 2 test will run
+		text("Press '6' to run the Unit 3 test, project 2.", 145, 275);//instructions for how Unit 3 test will run
 
 
 	}
@@ -157,8 +160,8 @@ public class MidiWorldMain extends PApplet {
 			ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
 			ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
 			
-			pitchGenerator.train(midiNotes.getPitchArray()); //trains the pitchGenerator
-			rhythmGenerator.train(midiNotes.getRhythmArray()); //trains the rhythmGenerator
+			pitchGenerator.train(unitOneTest.getPitchArray()); //trains the pitchGenerator
+			rhythmGenerator.train(unitOneTest.getRhythmArray()); //trains the rhythmGenerator
 		
 			System.out.println(pitchGenerator.generate(20)); //prints out the notes for the pitches from the generated melody
 			System.out.println(rhythmGenerator.generate(20)); //prints out the rhythms from the generated melody
@@ -168,8 +171,8 @@ public class MidiWorldMain extends PApplet {
 			ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
 			ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
 			
-			pitchGenerator.train(midiNotes.getPitchArray());
-			rhythmGenerator.train(midiNotes.getRhythmArray());
+			pitchGenerator.train(unitOneTest.getPitchArray());
+			rhythmGenerator.train(unitOneTest.getRhythmArray());
 			
 			ProbabilityGenerator<Integer> probDistGenPitch = new ProbabilityGenerator<Integer>(); //declares and initializes another probability Generator for the new pitch value probabilities
 			ProbabilityGenerator<Double> probDistGenRhythm = new ProbabilityGenerator<Double>(); //declares and initializes another probability Generator for the new rhythm value probabilities
@@ -186,44 +189,52 @@ public class MidiWorldMain extends PApplet {
             probDistGenRhythm.printProbability(); //printing out the rhythm probability distribution of 10,000 melodies
             
 		}
-		else if (key == '4') {
+		else if (key == '4') { //pressing the key 4 for unit test 1 in project 2
 			MarkovGenerator<Integer> mpitchGenerator = new MarkovGenerator<Integer>();
 			MarkovGenerator<Double> mrhythmGenerator = new MarkovGenerator<Double>();
-			
-			// returns a url
-			String filePath1 = getPath("mid/MaryHadALittleLamb.mid"); //playing Mary Had A Little Lamb midi file
-			// playMidiFile(filePath);
+						
+			mpitchGenerator.train(unitOneTest.getPitchArray());
+			mrhythmGenerator.train(unitOneTest.getRhythmArray());
 
-			midiNotes = new MidiFileToNotes(filePath1); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
-			//be created with "new". Note how every object is a pointer or reference. Every. single. one.
-
-			// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
-			midiNotes.setWhichLine(0);
-			
-			mpitchGenerator.train(midiNotes.getPitchArray());
-			mrhythmGenerator.train(midiNotes.getRhythmArray());
-
-//			player = new MelodyPlayer(this, 100.0f);
-//			player.setup();
-//			player.setMelody(mpitchGenerator.generate(20));
-//			player.setRhythm(mrhythmGenerator.generate(20));
 			
 			mpitchGenerator.printTransitionTable(); //prints the transitionTable for pitches
 			mrhythmGenerator.printTransitionTable();//prints the transitionTable for rhythm		
 			
-			} else if (key == '5') {
-				MarkovGenerator<Integer> mpitchGenerator = new MarkovGenerator<Integer>();
-				MarkovGenerator<Double> mrhythmGenerator = new MarkovGenerator<Double>();
+			} 
+		else if (key == '5') { //pressing the key 5 for unit test 2 in project 2
+				MarkovGenerator<Integer> mpitchGenerator = new MarkovGenerator<Integer>(); //declaring and initializing new MarkovGenerator for pitch
+				MarkovGenerator<Double> mrhythmGenerator = new MarkovGenerator<Double>(); //declaring and initializing new MarkovGenerator for rhythm
 				
-//				ProbabilityGenerator<Integer> initTokenGen = new ProbabilityGenerator<Integer>();				
-//				T initToken = initTokenGen.train(midiNotes.getPitchArray());
+				mpitchGenerator.train(unitOneTest.getPitchArray()); //training pitch Markov Generator with input generated from ProbGen
+				mrhythmGenerator.train(unitOneTest.getRhythmArray()); //training rhythm Markov Generator with input generated from ProbGen
 				
-
-				
-//				T initToken = initTokenGen.train(midiNotes.getPitchArray());
-				
-//				mpitchGenerator.generate();
+				System.out.println(mpitchGenerator.generate(20)); //prints out the notes for the pitches from the generated melody
+				System.out.println(mrhythmGenerator.generate(20)); //prints out the rhythms from the generated melody	
 			
+			} 
+		else if (key == '6') { //pressing the key 6 for unit test 3 in project 2
+				MarkovGenerator<Integer> mpitchGenerator = new MarkovGenerator<Integer>(); //declaring and initializing new MarkovGenerator for pitch
+				MarkovGenerator<Double> mrhythmGenerator = new MarkovGenerator<Double>(); //declaring and initializing new MarkovGenerator for rhythm
+				
+				mpitchGenerator.train(unitOneTest.getPitchArray()); //training pitch Markov Generator with input generated from ProbGen
+				mrhythmGenerator.train(unitOneTest.getRhythmArray()); //training rhythm Markov Generator with input generated from ProbGen
+				
+				MarkovGenerator<Integer> markovGenPitches = new MarkovGenerator<Integer>(); //declares and initializes another Markov Generator for the new pitch value probabilities
+				MarkovGenerator<Double> markovGenRhythms = new MarkovGenerator<Double>(); //declares and initializes another Markov Generator for the new rhythm value probabilities
+
+
+					for (int i = 0; i <= 10000; i++) { //iterating through 10,000 possible melodies of size 20 
+			            ArrayList <Integer> newSongPitch = mpitchGenerator.generate(20); 
+			            ArrayList<Double> newSongRhythm = mrhythmGenerator.generate(20); 
+			            markovGenPitches.train(newSongPitch); //training the markovGenPitches markov generator with the new arraylist, newSongPitch
+			            markovGenRhythms.train(newSongRhythm); //training the markovGenRhythms markov generator with the new arraylist, newSongRhythm
+						
+					}
+					
+					markovGenPitches.printTransitionTable(); //printing out the transition table values for pitches and rhythm
+					markovGenRhythms.printTransitionTable();
+									
+				
 			}
 		
 		} 

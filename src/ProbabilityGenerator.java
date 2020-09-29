@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Sep 14, 2020
+//Date: Sep 28, 2020
 //Description
 
 //this website helped me understand how to cleanly sum previous values in an arraylist
@@ -59,13 +59,12 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 		for (float ac: alphabet_counts) { //this adds the values of normalized probability distribution to an ArrayList - probs
 			probs.add(ac/sum);
 		}
-		
+
 		for(int i = 0; i < probs.size()-1; i++) { //this adds the values of probs, with current and previous value summed together, to the ArrayList sumProbs
 			filler += probs.get(i);
 			sumProbs.add(filler);
 		}
 		sumProbs.add((float)1); //since we're starting behind from 0, have to add one after the loop has been executed
-
 		T newToken = null;
 		float randIndex = (float)Math.random(); //this randomly picks a number between 0.0 and 1.0, excluding 1.0
 	
@@ -77,7 +76,7 @@ public class ProbabilityGenerator <T> { //generic class for the Probability Gene
 			i++; //adds one to the index i every time you go through the loop
 		}
 		
-		newToken = alphabet.get(i-1); //newToken, after going through the while loop, then returns a value from the alphabet ArrayList
+		newToken = alphabet.get(i - 1); //newToken, after going through the while loop, then returns a value from the alphabet ArrayList
 		return newToken; //return the newToken value afterwards
 	}
 	
