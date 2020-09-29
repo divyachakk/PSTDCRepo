@@ -27,6 +27,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	//when you update your counts, always look at what the lastIndex was
 	
 	void train(ArrayList<T> input) { //training is the process of filling the empty transition table
+		initTokenGen.train(input);
 		
 		int lastIndex = -1;
 
@@ -95,29 +96,38 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 
 	
 	   T generate(T initToken){
-// 		initToken = initTokenGen.train(alphabet_counts);
-		   //int initToken = initTokenGen.generate();	   
-		   for (int i = 0; i <alphabet.size(); i++) {
-				int index = alphabet.indexOf(initToken);
-				ArrayList<Integer> row = transitionTable.get(index);	   
-				   initTokenGen.generate(row);
-		   }
+				float index = alphabet.indexOf(initToken);
+				ArrayList<Integer> row = transitionTable.get((int) index);	
+				
+			 float total = 0; //initializing sum to 0
+			  for (int k = 0; k < row.size(); k++) { //iterating through row arraylist values one by one
+				  total += row.get(k); //adding the values to the variable sum
+			  }
+			  if (total == 0) {
+				  return initTokenGen.generate();
+			  }
 
-		   
-		return initToken;
-		   
-		   
+		sum = total;
+		alphabet_counts = row;
+		return generate();
+		   	   
 	   }
 	   
 	   ArrayList<T> generate(T initToken, int numberOfTokensToGenerate){
+		   
 			ArrayList<T> newSequence = new ArrayList<T>();
+			T nextToken = initToken;
 			for(int i = 0; i < numberOfTokensToGenerate; i++) {
-				newSequence.add(generate());
+				newSequence.add(nextToken);
+				nextToken = generate(nextToken);					
 			}
 			
 			return newSequence;
-
 		   
+	   }
+	   
+	   ArrayList<T> generate(int length){
+		   return generate(initTokenGen.generate(), length);
 	   }
 	
 		//have to use an outside instance of probabilityGenerator in generate
