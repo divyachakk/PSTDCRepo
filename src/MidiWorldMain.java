@@ -69,7 +69,8 @@ public class MidiWorldMain extends PApplet {
 	public void draw() {
 		//boolean for playing 'is playing'
 //		boolean isPlaying = false;
-//		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		//make sure you code a stop and start - keypressed?
+		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		fill(13,19,41); //changing color of text
 		textSize(20); //setting the size of the text
 		text("Press any key to start the melody!",130,50);
