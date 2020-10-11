@@ -1,5 +1,13 @@
+//Programmer: Divya Chakkaram
+//Date: Sep 28, 2020
+//Description:
 
-public class MarkovChain<T> {
+import java.util.ArrayList;
+
+
+public class MarkovChain<T> extends MarkovGenerator<T> {
+	
+	
 
 }
 
