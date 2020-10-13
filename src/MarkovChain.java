@@ -6,6 +6,25 @@ import java.util.ArrayList;
 
 
 public class MarkovChain<T> extends MarkovGenerator<T> {
+	ArrayList<ArrayList<T>> allTheSequences = new ArrayList();
+	int orderM;
+	
+	
+	MarkovChain(){
+		 orderM = 0; 
+	}
+	
+	void train(ArrayList<T> input) {
+		
+		for (int i = orderM - 1; i < input.size() - 1; i ++ ) {
+			int curSequence = orderM.size();
+			
+			
+			
+		}
+		
+		
+	}
 	
 	
 
