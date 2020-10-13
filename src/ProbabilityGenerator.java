@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Sep 28, 2020
+//Date: Oct 13, 2020
 //Description
 
 //this website helped me understand how to cleanly sum previous values in an arraylist

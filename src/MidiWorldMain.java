@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Sep 28, 2020
+//Date: Oct 13, 2020
 //Description
 
 import processing.core.*; //importing processing libraries
@@ -237,6 +237,11 @@ public class MidiWorldMain extends PApplet {
 									
 				
 			}
+		else if (key == '7') {
+			MarkovChain<Integer> mTest = new MarkovChain<Integer>(2);
+			
+			mTest.train(unitOneTest.getPitchArray());
+		}
 		
 		} 
 		
