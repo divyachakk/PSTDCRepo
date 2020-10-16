@@ -4,75 +4,88 @@
 
 import java.util.ArrayList;
 
-
 public class MarkovChain<T> extends MarkovGenerator<T> {
 	ArrayList<T> curSequence = new ArrayList<T>();
-	ArrayList<T> uniqueAlphabetSequences = new ArrayList<T>();
-	ArrayList<ArrayList<T>> allTheSequences = new ArrayList();
+	ArrayList<ArrayList<T>> uniqueAlphabetSequences = new ArrayList();
 	int orderM;
-	
-	
-	MarkovChain(int order){
+
+	MarkovChain(int order) {
 		orderM = order;
 	}
-	
+
 	void train(ArrayList<T> input) {
-		
-	
-		for (int i = orderM - 1; i < input.size() - 1; i ++ ) {
-			//put a for loop to add a token to curSequence ( adding orderM tokens at t ime)  
-			//for loop starts at j - orderM - 1
-			//end loop at i (make sure it includes i)
-			//curSequence.add(input.get(j));
-	
-			for (int q = i - 1; q <= i; q++) {
+
+		for (int i = orderM - 1; i < input.size() - 1; i++) {
+
+			ArrayList<T> curSequence = new ArrayList<T>();
+			for (int q = i - (orderM - 1); q <= i; q++) {
 				curSequence.add(input.get(q));
-				System.out.println(curSequence);
 			}
-			  
-			  int rowIndex = uniqueAlphabetSequences.size();
-			  if (!uniqueAlphabetSequences.contains(curSequence)) {
-				  for (int q = 0; q < curSequence.size(); q++) {
-					  uniqueAlphabetSequences.add(curSequence.get(q));					  
-				  }
 
-		  
-			  ArrayList<Integer> newRow = new ArrayList();
-			  for (int j = 0; j < alphabet.size(); j++) { 
-					newRow.add(0);	
-					
-					}
+			int rowIndex = uniqueAlphabetSequences.indexOf(curSequence);
+			if (rowIndex == -1) {
+				rowIndex = uniqueAlphabetSequences.size();
+				uniqueAlphabetSequences.add(curSequence);
+
+
+				ArrayList<Integer> newRow = new ArrayList();
+				for (int j = 0; j < alphabet.size(); j++) {
+					newRow.add(0);
+
+				}
 				transitionTable.add(newRow);
-			  
-			  }
-			  
-			  int tokenIndex = alphabet.indexOf(i + 1);
-			   if (tokenIndex == - 1) {
-				   tokenIndex = alphabet.size();
-					   alphabet.add(tokenIndex); //maybe create a for loop here?
-					   
-				   }
 
-				   for (int k = 0; k < transitionTable.size(); k++) { 
-						transitionTable.get(k).add(0); 
-			   }
-			  		
-		
-			   
-			   ArrayList<Integer> Row1 = transitionTable.get(rowIndex);  
-			   int myColumn = Row1.get(tokenIndex);
-			   myColumn++;
-			   Row1.set(tokenIndex, myColumn);
-			   			   
-		
-		
-		}	
+			}
 
-}
+			int tokenIndex = alphabet.indexOf(input.get(i)); // im technically not getting the next token in the
+																// alphabet (i+1) tho
+			if (tokenIndex == -1) {
+				tokenIndex = alphabet.size();
+				alphabet.add(input.get(i)); 
+				for (int k = 0; k < transitionTable.size(); k++) {
+					transitionTable.get(k).add(0);
+				}
+
+			}
+
+			ArrayList<Integer> Row1 = transitionTable.get(rowIndex); // what is rowIndex - this may be why the row is
+																		// empty
+			int myColumn = Row1.get(tokenIndex);
+			myColumn++;
+			Row1.set(tokenIndex, myColumn);
+
+		}
+
+		//System.out.println(transitionTable);
+		// System.out.println(uniqueAlphabetSequences);
+
+	}
 	
+	void printOrdersTransTable(){
+		System.out.println(alphabet);//print out the alphabet arraylist before going through transition table/row arraylists
+
+		 for (int j = 0; j < transitionTable.size(); j++) { //iterating through the transition table
+			 ArrayList<Integer> sumrow = transitionTable.get(j); //initializing the arraylist sumrow to trnasitiontable.get(j)
+			 float sum = 0; //initializing sum to 0
+			  for (int k = 0; k < sumrow.size(); k++) { //iterating through sumrow arraylist values one by one
+				  sum += sumrow.get(k); //adding the values to the variable sum
+			  }
+			  System.out.print(alphabet.get(j)); //printing out alphabet from iterating through transition table values
+				  for (int o = 0; o <sumrow.size(); o++) { //iterating through sumrow values again
+					  if (sum == 0) { //if the value of sum = 0, print out "0.0" for the space
+						  System.out.print(" 0.0 ");
+					  }
+					  else { //if sum doesn't equal 0, print out the values in the sumrow one by one divided by the value of sum
+					  System.out.print(" " + sumrow.get(o)/sum + " ");
+					  }					  
+				  }
+				  
+				  System.out.println(); //println a space
+
+			  }
+		}
+
 }
-
-
 
 //for i = orderM -1 to (i < size of the input - 1) do
 //{
@@ -96,7 +109,7 @@ public class MarkovChain<T> extends MarkovGenerator<T> {
 //	3.	Find the current next token (tokenIndex)
 //	{
 //		tokenIndex = the next index of the token in the alphabet (i+1)
-//			
+//				
 //		if tokenIndex is not found in the alphabet
 //		{
 //			1. tokenIndex = size of the alphabet 
@@ -104,14 +117,13 @@ public class MarkovChain<T> extends MarkovGenerator<T> {
 //			3. expand transitionTable horizontally
 //		}
 //	}
+
 //			
 //	4.	Update the counts – since we started after the beginning, rowIndex will not be -1
 //		a.	Get the row using rowIndex
 //		b.	Get the column using tokenIndex
 //		c.	Add one to that value retrieved from the transition table
 //}
-
-
 
 //use this to think about how to find an ArrayList in an ArrayList<ArrayList<T>>
 
