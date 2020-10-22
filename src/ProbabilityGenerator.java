@@ -11,9 +11,9 @@
 import java.util.ArrayList; //importing ArrayList from Java into Eclipse IDE
 import java.util.Collections;
 
-public class ProbabilityGenerator <String> { //generic class for the Probability Generator
+public class ProbabilityGenerator <T> { //generic class for the Probability Generator
 	
-	ArrayList<String> alphabet; //take the pitches of unique notes and put into this ArrayList, alphabet
+	ArrayList<T> alphabet; //take the pitches of unique notes and put into this ArrayList, alphabet
 	ArrayList<Integer> alphabet_counts;//this is an ArrayList for keeping track of/counting how many times each unique pitch occurs
 	float sum;//variable used to find the total number of newTokens in the projects
 	ArrayList<Float> probs;
@@ -22,12 +22,12 @@ public class ProbabilityGenerator <String> { //generic class for the Probability
 	
 	ProbabilityGenerator()
 	{
-		alphabet = new ArrayList<String>(); //initializing alphabet ArrayList
+		alphabet = new ArrayList<T>(); //initializing alphabet ArrayList
 		alphabet_counts = new ArrayList<Integer>(); //initializing alphabet_counts ArrayList
 	}
 	
 	//it is training probability generator with new data
-	void train(ArrayList<String> newTokens) 
+	void train(ArrayList<T> newTokens) 
 	{
 		for (int i = 0; i < newTokens.size(); i++  ) { //parsing through each note in newTokens.size(), which is the total ArrayList size
 			//list of alphabet to find newTokens in the alphabet
@@ -51,7 +51,7 @@ public class ProbabilityGenerator <String> { //generic class for the Probability
 		}
 	}
 	
-	String generate() {
+	T generate() {
 		probs = new ArrayList<Float>(); //declaring float ArrayList for probs 
 		sumProbs = new ArrayList<Float>(); //declaring float ArrayList for sumProbs
 		float filler = 0; //declaring and initializing float filler
@@ -65,7 +65,7 @@ public class ProbabilityGenerator <String> { //generic class for the Probability
 			sumProbs.add(filler);
 		}
 		sumProbs.add((float)1); //since we're starting behind from 0, have to add one after the loop has been executed
-		String newToken = null;
+		T newToken = null;
 		float randIndex = (float)Math.random(); //this randomly picks a number between 0.0 and 1.0, excluding 1.0
 	
 		boolean found = false; //sets found to false
@@ -80,8 +80,8 @@ public class ProbabilityGenerator <String> { //generic class for the Probability
 		return newToken; //return the newToken value afterwards
 	}
 	
-	ArrayList<String> generate(int length) {
-		ArrayList<String> newSequence = new ArrayList<String>();
+	ArrayList<T> generate(int length) {
+		ArrayList<T> newSequence = new ArrayList<T>();
 		for(int i = 0; i < length; i++) {
 			newSequence.add(generate());
 		}

@@ -37,11 +37,11 @@ public class MarkovChain<T> extends MarkovGenerator<T> {
 
 			}
 
-			int tokenIndex = alphabet.indexOf(input.get(i)); // im technically not getting the next token in the
+			int tokenIndex = alphabet.indexOf(input.get(i + 1)); // im technically not getting the next token in the
 																// alphabet (i+1) tho
 			if (tokenIndex == -1) {
 				tokenIndex = alphabet.size();
-				alphabet.add(input.get(i)); 
+				alphabet.add(input.get(i + 1)); 
 				for (int k = 0; k < transitionTable.size(); k++) {
 					transitionTable.get(k).add(0);
 				}
@@ -70,7 +70,7 @@ public class MarkovChain<T> extends MarkovGenerator<T> {
 			  for (int k = 0; k < sumrow.size(); k++) { //iterating through sumrow arraylist values one by one
 				  sum += sumrow.get(k); //adding the values to the variable sum
 			  }
-			  System.out.print(alphabet.get(j)); //printing out alphabet from iterating through transition table values
+			  System.out.print(uniqueAlphabetSequences.get(j)); //printing out alphabet from iterating through transition table values
 				  for (int o = 0; o <sumrow.size(); o++) { //iterating through sumrow values again
 					  if (sum == 0) { //if the value of sum = 0, print out "0.0" for the space
 						  System.out.print(" 0.0 ");
@@ -81,49 +81,11 @@ public class MarkovChain<T> extends MarkovGenerator<T> {
 				  }
 				  
 				  System.out.println(); //println a space
-
 			  }
 		}
 
 }
 
-//for i = orderM -1 to (i < size of the input - 1) do
-//{
-//			
-//	1.	Create the current sequence (eg. curSequence) of size orderM from the input
-//	Remember to start the index into the input at 0 (with this algorithm) 
-//		a.	add the previous tokens to a container (eg ArrayList). 
-//		b.	You may do this in a for-loop or use .subList()
-//			i.	https://beginnersbook.com/2013/12/how-to-get-sublist-of-an-arraylist-with-example/
-//				
-//	2.	Find  curSequence in uniqueAlphabetSequences
-//	if curSequence is not found
-//	{
-//		1. set rowIndex to the size of uniqueAlphabetSequences
-//				
-//		2. add the curSequence to uniqueAlphabetSequences
-//
-//		3. add a new row to the transition table the size of the alphabet
-//	}
-//
-//	3.	Find the current next token (tokenIndex)
-//	{
-//		tokenIndex = the next index of the token in the alphabet (i+1)
-//				
-//		if tokenIndex is not found in the alphabet
-//		{
-//			1. tokenIndex = size of the alphabet 
-//			2. add the token to the alphabet
-//			3. expand transitionTable horizontally
-//		}
-//	}
-
-//			
-//	4.	Update the counts – since we started after the beginning, rowIndex will not be -1
-//		a.	Get the row using rowIndex
-//		b.	Get the column using tokenIndex
-//		c.	Add one to that value retrieved from the transition table
-//}
 
 //use this to think about how to find an ArrayList in an ArrayList<ArrayList<T>>
 

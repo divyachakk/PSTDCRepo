@@ -19,6 +19,7 @@ import java.net.*;
 
 //make sure this class name matches your file name, if not fix.
 public class MidiWorldMain extends PApplet {
+	boolean isPlaying = false; //setting boolean isPlaying to false
 
 	MelodyPlayer player; // play a midi sequence
 	MidiFileToNotes midiNotes; // read a midi file
@@ -31,7 +32,7 @@ public class MidiWorldMain extends PApplet {
 
 	// setting the window size to 300x300
 	public void settings() {
-		size(600, 300); // changing the window size to be longer
+		size(600, 335); // changing the window size to be longer
 
 	}
 
@@ -67,14 +68,18 @@ public class MidiWorldMain extends PApplet {
 	}
 
 	public void draw() {
-		// boolean for playing 'is playing'
-//		boolean isPlaying = false;
-		// make sure you code a stop and start - keypressed?
-		player.play(); // play each note in the sequence -- the player will determine whether is time
-						// for a note onset
+
+		if (isPlaying) { //if the boolean is true
+			player.play(); // play each note in the sequence -- the player will determine whether is time
+							// for a note onset
+		}
+
+		fill(255, 255, 255); // changing color of text
+		textSize(18); // setting the size of the text
+		text("Press p to start the melody!", 170, 30);
+		text("Press s to stop the melody!", 170, 60);
+		
 		fill(13, 19, 41); // changing color of text
-		textSize(20); // setting the size of the text
-		text("Press any key to start the melody!", 130, 50);
 		textSize(15);
 		text("Press '1' to run the Unit 1 test, project 1.", 145, 100);// instructions for how Unit 1 test will run
 		text("Press '2' to run the Unit 2 test, project 1.", 145, 135);// instructions for how Unit 2 test will run
@@ -82,6 +87,7 @@ public class MidiWorldMain extends PApplet {
 		text("Press '4' to run the Unit 1 test, project 2.", 145, 205);// instructions for how Unit 1 test will run
 		text("Press '5' to run the Unit 2 test, project 2.", 145, 240);// instructions for how Unit 2 test will run
 		text("Press '6' to run the Unit 3 test, project 2.", 145, 275);// instructions for how Unit 3 test will run
+		text("Press '7' to run the Unit 1 test, project 3.", 145, 310);// instructions for how Unit 3 test will run
 
 	}
 
@@ -126,13 +132,16 @@ public class MidiWorldMain extends PApplet {
 		// ie, one instrument)'s worth of data from the file
 		unitOneTest.setWhichLine(0);
 
-		if (key == ' ') {
-//			player.play();
+		if (key == 'p') {
+			isPlaying = true; //changes the value of the boolean to true
+			println("Melody started!"); // if p is pressed, it will print to console that Melody has started
+			
+		} else if (key == 's') {
+			isPlaying = false; //changes the value of the boolean back to false
 			player.reset(); // resetting the playing sequence
-			println("Melody started!"); // if any key is pressed, it will print to console that Melody has started
-		}
+			println("Melody stopped!"); // if s is pressed, it will print to console that Melody has stopped
 
-		else if (key == '1') { // pressing the key "1" for Unit test 1
+		} else if (key == '1') { // pressing the key "1" for Unit test 1
 
 			// create my generators for pitch and rhythm
 			ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
@@ -274,24 +283,17 @@ public class MidiWorldMain extends PApplet {
 			markovGenRhythms.printTransitionTable();
 
 		} else if (key == '7') {
-//			for (int n = 1; n <= 10; n++) {
-//				MarkovChain<Integer> mPitchChain = new MarkovChain<Integer>(n);
-//				MarkovChain<Double> mRhythmChain = new MarkovChain<Double>(n);	
-//				
-//				mPitchChain.train(unitOneTest.getPitchArray());
-//				mRhythmChain.train(unitOneTest.getRhythmArray());
-//				
-//				mPitchChain.printTransitionTable();
-//				mRhythmChain.printTransitionTable();
-//			}
-			MarkovChain<Integer> mPitchChain = new MarkovChain<Integer>(1);
-			MarkovChain<Double> mRhythmChain = new MarkovChain<Double>(1);
+			for (int n = 1; n <= 10; n++) {
+				MarkovChain<Integer> mPitchChain = new MarkovChain<Integer>(n);
+				MarkovChain<Double> mRhythmChain = new MarkovChain<Double>(n);
 
-			mPitchChain.train(unitOneTest.getPitchArray());
-			mRhythmChain.train(unitOneTest.getRhythmArray());
+				mPitchChain.train(unitOneTest.getPitchArray());
+				mRhythmChain.train(unitOneTest.getRhythmArray());
 
-			// mPitchChain.printOrdersTransTable();
-			// mRhythmChain.printOrdersTransTable();
+				mPitchChain.printOrdersTransTable();
+				mRhythmChain.printOrdersTransTable();
+			}
+
 		}
 
 	}
