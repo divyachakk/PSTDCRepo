@@ -7,7 +7,7 @@ public class Node<T> extends Tree<T> {
 		// TODO Auto-generated constructor stub
 	}
 
-	ArrayList<T> tokenSequence;
+	ArrayList<T> tokenSequence = curSequence;
 	ArrayList<Node> children;
 
 	boolean addNode(Node node) {
