@@ -1,32 +1,32 @@
 import java.util.ArrayList;
 
-public class Node<T> extends Tree<T> {
+public class Node<T> {
+	ArrayList<T> tokenSequence;
 
-	Node(int length) {
-		super(length);
-		// TODO Auto-generated constructor stub
+	Node(ArrayList<T> curSequence) {
+		tokenSequence = curSequence;
 	}
 
-	ArrayList<T> tokenSequence = curSequence;
 	ArrayList<Node> children;
 
 	boolean addNode(Node node) {
 		boolean found = false;
 
-		if (node.tokenSequence == root.tokenSequence) { // if token sequence of THIS node is the token sequence of the
-														// added node
+		if (node.getTokenSequence().equals(tokenSequence)) { // if token sequence of THIS node is the token sequence of
+																// the added node
 			found = true;
 		} else if (amIASuffix(node) || (tokenSequence.size() == 0)) {
 
-			// 1.try to add the node to all the children nodes.
-			// 2.Did one your child nodes add the node? **keep track of this via the found
-			// variable**
-			// If NOT found and the length of node’s tokenSequence is one less than this
-			// tokenSequenceAdd the node to our children array.
-			// Thus-found=true.children.add(node);
+			int i = 0;
+			while (i <= children.size()) {
+				found = children.get(i).addNode(node);
+				if (found = false) {
+					break;
+				}
+				i++;
+			}
 
-			//what does everything above this say
-			if (found = true) { 
+			if (!found) {
 				children.add(node);
 			}
 
@@ -35,14 +35,22 @@ public class Node<T> extends Tree<T> {
 
 	}
 
-	void print() {
+	ArrayList<T> getTokenSequence() {
+
+		return tokenSequence;
 
 	}
 
 	boolean amIASuffix(Node node) {
-		//try to figure this out using notes
+		boolean suffix = false;
+		// try to figure this out using notes
+		// if (node.tokenSequence.subList(2, 4))
 
-		return false;
+		return suffix;
+
+	}
+
+	void print() {
 
 	}
 

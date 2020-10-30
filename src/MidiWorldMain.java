@@ -65,9 +65,16 @@ public class MidiWorldMain extends PApplet {
 		player.setup();
 		player.setMelody(pitchGenerator.generate(20));
 		player.setRhythm(rhythmGenerator.generate(20));
+		
+		String[] myList = {"a", "b", "a", "c","a", "d"};
+		ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); 
+		Tree<String> testTree = new Tree<String>(3);
+		testTree.train(testList);
 	}
 
 	public void draw() {
+	
+		
 
 		if (isPlaying) { //if the boolean is true
 			player.play(); // play each note in the sequence -- the player will determine whether is time
