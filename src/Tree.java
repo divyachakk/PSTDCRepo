@@ -19,9 +19,9 @@ public class Tree<T> {
 															// through to get it to parse through orderM size
 					curSequence.add(input.get(q));
 				}
-				System.out.println(curSequence);
+
 				 Node newNode = new Node(curSequence);
-				 System.out.println(newNode);
+				 root = new Node(curSequence);
 				 root.addNode(newNode);
 
 			}
