@@ -68,8 +68,17 @@ public class MidiWorldMain extends PApplet {
 		
 		String[] myList = {"a", "b", "a", "c","a", "d"};
 		ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); 
+		
+		String[] suffixList = {"c","a", "d"};
+		ArrayList<String> testSuffix = new ArrayList(Arrays.asList(suffixList));
+		
 		Tree<String> testTree = new Tree<String>(3);
 		testTree.train(testList);
+		
+		Node test = new Node(testList);
+		Node suffix = new Node(testSuffix);
+		test.amIASuffix(suffix);
+		
 	}
 
 	public void draw() {
