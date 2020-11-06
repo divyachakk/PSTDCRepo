@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Oct 13, 2020
+//Date: Oct 27, 2020
 //Description
 
 import processing.core.*; //importing processing libraries
@@ -19,7 +19,7 @@ import java.net.*;
 
 //make sure this class name matches your file name, if not fix.
 public class MidiWorldMain extends PApplet {
-	boolean isPlaying = false; //setting boolean isPlaying to false
+	boolean isPlaying = false; // setting boolean isPlaying to false
 
 	MelodyPlayer player; // play a midi sequence
 	MidiFileToNotes midiNotes; // read a midi file
@@ -32,14 +32,14 @@ public class MidiWorldMain extends PApplet {
 
 	// setting the window size to 300x300
 	public void settings() {
-		size(600, 335); // changing the window size to be longer
+		size(600, 240); // changing the window size to be longer
 
 	}
 
 	// doing all the setup stuff
 	public void setup() {
 		fill(120, 50, 240);
-		background(105, 207, 190); // changing the background color to teal
+		background(108, 186, 126); // changing the background color to teal
 
 		// create my generators for pitch and rhythm
 		ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
@@ -65,40 +65,29 @@ public class MidiWorldMain extends PApplet {
 		player.setup();
 		player.setMelody(pitchGenerator.generate(20));
 		player.setRhythm(rhythmGenerator.generate(20));
-		
-		String[] myList = {"a", "b", "a", "c","a", "d"};
-		ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); 
-		
-		String[] suffixList = {"c","a", "d"};
-		ArrayList<String> testSuffix = new ArrayList(Arrays.asList(suffixList));
-		
-		Tree<String> testTree = new Tree<String>(3);
-		testTree.train(testList);
-		
-		Node test = new Node(testList);
-		Node suffix = new Node(testSuffix);
-		test.amIASuffix(suffix);
-		
+
 	}
 
 	public void draw() {
-	
-		
 
-		if (isPlaying) { //if the boolean is true
+		if (isPlaying) { // if the boolean is true
 			player.play(); // play each note in the sequence -- the player will determine whether is time
 							// for a note onset
 		}
 
-		fill(255, 255, 255); // changing color of text
+		fill(241, 232, 223); // changing color of text
 		textSize(18); // setting the size of the text
 		text("Press p to start the melody!", 170, 30);
 		text("Press s to stop the melody!", 170, 60);
-		
-		fill(13, 19, 41); // changing color of text
+
+		fill(63, 34, 7); // changing color of text
 		textSize(15);
 
-		text("Press '7' to run the Unit 1 test, project 3.", 145, 310);// instructions for how Unit 3 test will run
+		text("Press 'a' to run suffix tree output for:  abracadabra", 105, 90);
+		text("Press 'b' to run suffix tree output for:  acadaacbda", 105, 120);
+		text("Press 'c' to run suffix tree output for:  abcccdaadcdaabcadad", 80, 150);
+		text("Press 'd' to run Suffix tree output for: Mary Had a Little Lamb", 78, 180);
+		text("Press '7' to run the Unit 1 test, project 3.", 145, 210);// instructions for how Unit 3 test will run
 
 	}
 
@@ -144,11 +133,11 @@ public class MidiWorldMain extends PApplet {
 		unitOneTest.setWhichLine(0);
 
 		if (key == 'p') {
-			isPlaying = true; //changes the value of the boolean to true
+			isPlaying = true; // changes the value of the boolean to true
 			println("Melody started!"); // if p is pressed, it will print to console that Melody has started
-			
+
 		} else if (key == 's') {
-			isPlaying = false; //changes the value of the boolean back to false
+			isPlaying = false; // changes the value of the boolean back to false
 			player.reset(); // resetting the playing sequence
 			println("Melody stopped!"); // if s is pressed, it will print to console that Melody has stopped
 
@@ -164,6 +153,62 @@ public class MidiWorldMain extends PApplet {
 				mRhythmChain.printOrdersTransTable();
 			}
 
+		} else if (key == 'a') { //if you press the key a
+			System.out.println("------------------------------");
+			System.out.println("abracadabra: PST L=3");
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = { "a", "b", "r", "a", "c", "a", "d", "a", "b", "r", "a" }; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
+
+			Tree<String> testTree = new Tree<String>(3); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above arrayList testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+
+		} else if (key == 'b') {
+			System.out.println("------------------------------");
+			System.out.println("acadaacbda: PST L=3");
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = { "a","c","a","d","a","a","c","b","d","a" }; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
+
+			Tree<String> testTree = new Tree<String>(3); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above Tree with testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+			
+
+		} else if (key == 'c') {
+			System.out.println("------------------------------");
+			System.out.println("abcccdaadcdaabcadad: PST L=3");
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = {"a","b","c","c","c","d","a","a","d","c","d","a","a","b","c","a","d","a","d"}; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
+
+			Tree<String> testTree = new Tree<String>(3); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above Tree with testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+
+		} else if(key == 'd') {			
+			String filePath1 = getPath("mid/MaryHadALittleLamb.mid"); // playing Mary Had A Little Lamb midi file
+			
+			midiNotes = new MidiFileToNotes(filePath1); // creates a new MidiFileToNotes
+			midiNotes.setWhichLine(0);
+			
+			System.out.println("------------------------------");
+			System.out.println("Mary Had a Little Lamb: PST L=3");
+			System.out.println("------------------------------");
+			//print out the PST for the input song file above, and the order length given above
+			
+			Tree<Integer> testTree = new Tree<Integer>(3); //create a new Tree of Integers, with order length of 3
+			testTree.train(midiNotes.getPitchArray()); //train the Tree of Integers with midinotes.getPitchArray()
+			testTree.print(); //print out the PST of order length 3 for the Tree of integers
+			
+			
 		}
 
 	}
