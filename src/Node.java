@@ -98,7 +98,7 @@ public class Node<T> {
 		if (!shouldRemove || empiricalProb == 0) { // how do you let the empty tokenSequence pass?
 			// for each node
 			for (int i = children.size(); i > 0; i--) { // do you include the zero? in other words, i >= 0?
-				if (children.get(i).pMinElimination(10, (float) 0.15)) {
+				if (children.get(i).pMinElimination(totalTokens, (float) 0.1)) { //what is the value you put in the first spot
 					children.remove(i);
 				}
 			}

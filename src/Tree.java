@@ -6,11 +6,13 @@ import java.util.ArrayList;
 public class Tree<T> {
 	Node root; //create the Node root
 	int L; // maximum token sequence length
+	int totalInputTokens;
+	float pMin;
 
-	Tree(int length) { //Tree with constructor of length
+	Tree(int length, float p) { //Tree with constructor of length
 		L = length; //set global and local variables for L and length equal to each other
 		root = new Node(new ArrayList<T>()); //set the Node root equal to a new Node filled with constructor value of a new ArrayList
-
+		pMin = p;
 	}
 
 	void train(ArrayList<T> input) { //train method in Tree
@@ -28,7 +30,9 @@ public class Tree<T> {
 
 			}
 		}
-
+		
+		totalInputTokens =+ input.size();
+		root.pMinElimination(totalInputTokens, (float)0.15);
 	}
 
 	void print() { //print method
