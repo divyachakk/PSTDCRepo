@@ -222,8 +222,102 @@ public class MidiWorldMain extends PApplet {
 			testTree.train(testList); //train the above arrayList testList
 			testTree.print(); //print out the PST of order length 3 for testList ArrayList
 			
-		}
+		} else if (key == 'f') {
+			System.out.println("------------------------------");
+			System.out.println("acadaacbda: PST L=3, Pmin = 0.1");
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = { "a","c","a","d","a","a","c","b","d","a" }; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
 
+			Tree<String> testTree = new Tree<String>(3, (float)0.1); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above Tree with testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+			
+		} else if (key == 'g') {
+			System.out.println("------------------------------");
+			System.out.println("abcccdaadcdaabcadad: PST L=3, Pmin = 0.1");
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = {"a","b","c","c","c","d","a","a","d","c","d","a","a","b","c","a","d","a","d"}; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
+
+			Tree<String> testTree = new Tree<String>(3,(float)0.1); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above Tree with testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+			
+		} else if (key == 'h') {
+			String filePath1 = getPath("mid/MaryHadALittleLamb.mid"); // playing Mary Had A Little Lamb midi file
+			
+			midiNotes = new MidiFileToNotes(filePath1); // creates a new MidiFileToNotes
+			midiNotes.setWhichLine(0);
+			
+			System.out.println("------------------------------");
+			System.out.println("Mary Had a Little Lamb: PST L=3, Pmin = 0.1");
+			System.out.println("------------------------------");
+			//print out the PST for the input song file above, and the order length given above
+			
+			Tree<Integer> testTree = new Tree<Integer>(3, (float)0.1); //create a new Tree of Integers, with order length of 3
+			testTree.train(midiNotes.getPitchArray()); //train the Tree of Integers with midinotes.getPitchArray()
+			testTree.print(); //print out the PST of order length 3 for the Tree of integers
+		
+		} else if (key == 'i') {
+			System.out.println("------------------------------");
+			System.out.println("abracadabra: PST L=3, Pmin = 0.15");
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = { "a", "b", "r", "a", "c", "a", "d", "a", "b", "r", "a" }; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
+
+			Tree<String> testTree = new Tree<String>(3, (float)0.15); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above arrayList testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+			
+		} else if (key == 'j') {
+			System.out.println("------------------------------");
+			System.out.println("acadaacbda: PST L=3, Pmin = 0.15");
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = { "a","c","a","d","a","a","c","b","d","a" }; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
+
+			Tree<String> testTree = new Tree<String>(3, (float)0.15); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above Tree with testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+			
+		} else if (key == 'k') {
+			System.out.println("------------------------------");
+			System.out.println("abcccdaadcdaabcadad: PST L=3, Pmin = 0.15");
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = {"a","b","c","c","c","d","a","a","d","c","d","a","a","b","c","a","d","a","d"}; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
+
+			Tree<String> testTree = new Tree<String>(3,(float)0.15); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above Tree with testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+			
+		} else if (key == 'l') {
+			String filePath1 = getPath("mid/MaryHadALittleLamb.mid"); // playing Mary Had A Little Lamb midi file
+			
+			midiNotes = new MidiFileToNotes(filePath1); // creates a new MidiFileToNotes
+			midiNotes.setWhichLine(0);
+			
+			System.out.println("------------------------------");
+			System.out.println("Mary Had a Little Lamb: PST L=3, Pmin = 0.15");
+			System.out.println("------------------------------");
+			//print out the PST for the input song file above, and the order length given above
+			
+			Tree<Integer> testTree = new Tree<Integer>(3, (float)0.15); //create a new Tree of Integers, with order length of 3
+			testTree.train(midiNotes.getPitchArray()); //train the Tree of Integers with midinotes.getPitchArray()
+			testTree.print(); //print out the PST of order length 3 for the Tree of integers
+			
+		}
 	}
 
 }

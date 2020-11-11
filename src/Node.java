@@ -92,18 +92,20 @@ public class Node<T> {
 		boolean shouldRemove = false;
 		float empiricalProb = 0;
 
-		empiricalProb = count / (totalTokens - tokenSequence.size() - 1);
-		shouldRemove = empiricalProb < pMin;
-
-		if (!shouldRemove || empiricalProb == 0) { // how do you let the empty tokenSequence pass?
+		empiricalProb = count / (float)(totalTokens - (tokenSequence.size() - 1));
+		shouldRemove = empiricalProb < pMin && tokenSequence.size() > 0;
+		
+		if (!shouldRemove) { 
 			// for each node
-			for (int i = children.size(); i > 0; i--) { // do you include the zero? in other words, i >= 0?
-				if (children.get(i).pMinElimination(totalTokens, (float) 0.1)) { //what is the value you put in the first spot
+			for (int i = children.size()-1; i >= 0; i--) { 
+		
+				if (children.get(i).pMinElimination(totalTokens, pMin)) {//what is the value you put in the first spot
 					children.remove(i);
 				}
+
 			}
 
-		}
+		} 
 
 		return shouldRemove;
 	}

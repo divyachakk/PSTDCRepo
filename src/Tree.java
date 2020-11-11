@@ -32,7 +32,7 @@ public class Tree<T> {
 		}
 		
 		totalInputTokens =+ input.size();
-		root.pMinElimination(totalInputTokens, (float)0.15);
+		root.pMinElimination(totalInputTokens, pMin);
 	}
 
 	void print() { //print method
