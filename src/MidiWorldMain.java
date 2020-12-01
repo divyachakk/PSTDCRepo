@@ -317,6 +317,17 @@ public class MidiWorldMain extends PApplet {
 			testTree.train(midiNotes.getPitchArray()); //train the Tree of Integers with midinotes.getPitchArray()
 			testTree.print(); //print out the PST of order length 3 for the Tree of integers
 			
+		} else if (key == 'q') {
+			System.out.println("------------------------------");
+			//print out the PST for the string above, and the order length given above
+			
+			String[] myList = {"g", "g", "g", "e", "f", "f", "f", "d", "g", "g", "g", "e", "a", "a", "a", "g", "e", "e", "e", "c", "g", "g", "g", "d", "g", "f", "f", "f", "d", "g", "g", "f", "e", "g", "g", "f", "e", "g", "g", "f", "e", "c", "g" }; //create individual strings
+			ArrayList<String> testList = new ArrayList(Arrays.asList(myList)); //set the String list above to an arrayList of Strings, TestList
+
+			Tree<String> testTree = new Tree<String>(3, (float)0.05); //create a new Tree of Strings, with order length of 3
+			testTree.train(testList); //train the above Tree with testList
+			testTree.print(); //print out the PST of order length 3 for testList ArrayList
+			
 		}
 	}
 
