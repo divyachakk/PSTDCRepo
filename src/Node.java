@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Oct 27, 2020
+//Date: Dec 3, 2020
 
 import java.util.ArrayList;
 
@@ -89,25 +89,29 @@ public class Node<T> {
 	}
 
 	boolean pMinElimination(int totalTokens, float pMin) {
-		boolean shouldRemove = false;
-		float empiricalProb = 0;
+		boolean shouldRemove = false; // set the boolean shouldRemove to false
+		float empiricalProb = 0; // initializing and declaring float empiricalProb
 
-		empiricalProb = count / (float)(totalTokens - (tokenSequence.size() - 1));
-		shouldRemove = empiricalProb < pMin && tokenSequence.size() > 0;
-		
-		if (!shouldRemove) { 
-			// for each node
-			for (int i = children.size()-1; i >= 0; i--) { 
-		
-				if (children.get(i).pMinElimination(totalTokens, pMin)) {//what is the value you put in the first spot
-					children.remove(i);
+		empiricalProb = count / (float) (totalTokens - (tokenSequence.size() - 1)); // set float empiricalProb to the
+																					// number of times count occurs,
+																					// over the total amount of times it
+																					// could have occured (size - 1)
+		shouldRemove = empiricalProb < pMin && tokenSequence.size() > 0; // set shouldRemove to empiricalProb of
+																			// specified tokenSequence and account for
+																			// empty sequence
+
+		if (!shouldRemove) { // if not shouldRemove or if shouldRemove is false
+			for (int i = children.size() - 1; i >= 0; i--) { // for each node
+
+				if (children.get(i).pMinElimination(totalTokens, pMin)) { //call pMin on the children nodes, and if they return true
+					children.remove(i); //remove that children and the entire node
 				}
 
 			}
 
-		} 
+		}
 
-		return shouldRemove;
+		return shouldRemove; //necessary return statement
 	}
 
 }

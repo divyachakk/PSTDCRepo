@@ -1,5 +1,5 @@
 //Programmer: Divya Chakkaram
-//Date: Oct 27, 2020
+//Date: Dec 3, 2020
 //Description
 
 import processing.core.*; //importing processing libraries
@@ -32,7 +32,7 @@ public class MidiWorldMain extends PApplet {
 
 	// setting the window size to 300x300
 	public void settings() {
-		size(600, 240); // changing the window size to be longer
+		size(600, 630); // changing the window size to be longer
 
 	}
 
@@ -75,19 +75,37 @@ public class MidiWorldMain extends PApplet {
 							// for a note onset
 		}
 
+		fill(249, 176, 249);
+		textSize(36); // setting the size of the text
+		text("THIS IS PST 1.5 REGRADE!", 80, 50);
+		
 		fill(241, 232, 223); // changing color of text
-		textSize(18); // setting the size of the text
-		text("Press p to start the melody!", 170, 30);
-		text("Press s to stop the melody!", 170, 60);
+		textSize(18);
+		text("Press p to start the melody!", 170, 90);
+		text("Press s to stop the melody!", 170, 120);
 
 		fill(63, 34, 7); // changing color of text
 		textSize(15);
 
-		text("Press 'a' to run suffix tree output for:  abracadabra", 105, 90);
-		text("Press 'b' to run suffix tree output for:  acadaacbda", 105, 120);
-		text("Press 'c' to run suffix tree output for:  abcccdaadcdaabcadad", 80, 150);
-		text("Press 'd' to run Suffix tree output for: Mary Had a Little Lamb", 78, 180);
-		text("Press '7' to run the Unit 1 test, project 3.", 145, 210);// instructions for how Unit 3 test will run
+		text("Press 'a' to run suffix tree output, Pmin = 0.0 for:  abracadabra", 75, 150);
+		text("Press 'b' to run suffix tree output, Pmin = 0.0 for:  acadaacbda", 75, 180);
+		text("Press 'c' to run suffix tree output, Pmin = 0.0 for:  abcccdaadcdaabcadad", 40, 210);
+		text("Press 'd' to run Suffix tree output, Pmin = 0.0 for: Mary Had a Little Lamb", 38, 240);
+		
+		fill(176, 237, 249);
+		text("Press 'e' to run Suffix tree output, Pmin = 0.1 for: abracadabra", 75, 300);
+		text("Press 'f' to run suffix tree output, Pmin = 0.1 for:  acadaacbda", 75, 330);
+		text("Press 'g' to run suffix tree output, Pmin = 0.1 for:  abcccdaadcdaabcadad", 40, 360);
+		text("Press 'h' to run Suffix tree output, Pmin = 0.1 for: Mary Had a Little Lamb", 38, 390);
+		
+		fill(249, 243, 176);
+		text("Press 'i' to run Suffix tree output, Pmin = 0.15 for: abracadabra", 75, 450);
+		text("Press 'j' to run suffix tree output, Pmin = 0.15 for:  acadaacbda", 75, 480);
+		text("Press 'k' to run suffix tree output, Pmin = 0.15 for:  abcccdaadcdaabcadad", 40, 510);
+		text("Press 'l' to run Suffix tree output, Pmin = 0.15 for: Mary Had a Little Lamb", 38, 540);
+		
+		fill(241, 232, 223); // changing color of text
+		text("Press '7' to run the Unit 1 test, project 3.", 145, 600);// instructions for how Unit 3 test will run
 
 	}
 
